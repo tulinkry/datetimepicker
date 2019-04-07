@@ -3,8 +3,7 @@
 namespace Tulinkry\DI;
 
 use Nette\DI\CompilerExtension;
-use Nette\Forms\Container;
-use Tulinkry\Forms\Controls\DateTimeInput;
+use Nette\PhpGenerator\ClassType;
 
 class DateTimeExtension extends CompilerExtension
 {
@@ -12,19 +11,20 @@ class DateTimeExtension extends CompilerExtension
 
     public function loadConfiguration()
     {
-        //$config = $this->getConfig($this->defaults);
-        //$builder = $this->getContainerBuilder();
-
-
-        $this->compiler->loadConfig($this->loadFromFile(__DIR__ . '/config.neon'))->processExtensions();
+        $this->compiler->loadConfig(__DIR__ . '/config.neon');
     }
 
 
-    public function afterCompile()
+    public function afterCompile(ClassType $class)
     {
-        Container::extensionMethod('addDateTime', function ($form, $name, $label = null) {
-            return $form[$name] = new DateTimeInput($label);
-        });
-    }
+        // metoda initialize
+        $initialize = $class->methods['initialize'];
 
+        $initialize->addBody(<<<EOT
+        \Nette\Forms\Container::extensionMethod('addDateTime', function (\$form, \$name, \$label = null) {
+            return \$form[\$name] = new \Tulinkry\Forms\Controls\DateTimeInput(\$label);
+        });
+EOT
+        );
+    }
 }
