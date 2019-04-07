@@ -1,0 +1,2 @@
+extensions:
+    scripts: Tulinkry\DI\ScriptExtension

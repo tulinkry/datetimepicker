@@ -1,0 +1,11 @@
+{script}
+
+$('#{$id|noescape}').datetimepicker({
+format: $(this).data('format') || 'YYYY-MM-DD HH:mm:ss',
+widgetPositioning: {
+horizontal: 'auto',
+vertical: 'bottom',
+}
+});
+
+{/script}
