@@ -1,11 +1,19 @@
+{*
+ * Load scripts with the script extension, unique + key will ensure that this script will be included just once
+ * in the resulting html.
+ *}
+{fileScript 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js', priority => 10|unique|key: moment.js}
+{fileScript 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js', priority => 20|unique|key: bootstrap-datetimepicker.js}
+{fileStyle 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css'|unique|key: bootstrap-datetimepicker.css}
+
 {script}
 
 $('#{$id|noescape}').datetimepicker({
-format: $(this).data('format') || 'YYYY-MM-DD HH:mm:ss',
-widgetPositioning: {
-horizontal: 'auto',
-vertical: 'bottom',
-}
+    format: $(this).data('format') || 'YYYY-MM-DD HH:mm:ss',
+    widgetPositioning: {
+        horizontal: 'auto',
+        vertical: 'bottom',
+    }
 });
 
 {/script}

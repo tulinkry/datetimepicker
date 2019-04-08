@@ -7,14 +7,6 @@ use Nette\PhpGenerator\ClassType;
 
 class DateTimeExtension extends CompilerExtension
 {
-    public $defaults = array();
-
-    public function loadConfiguration()
-    {
-        $this->compiler->loadConfig(__DIR__ . '/config.neon');
-    }
-
-
     public function afterCompile(ClassType $class)
     {
         // metoda initialize
